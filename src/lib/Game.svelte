@@ -100,6 +100,8 @@
             return
         }
 
+        inputWord = accentsTidy(inputWord.toLowerCase())
+
         if (!isWordInDictionnary(inputWord)) {
             shake = true
             setTimeout(_ => shake = false, 600)
