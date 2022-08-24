@@ -85,8 +85,7 @@
     }
 
     let shake = false
-    let wordToFind = Array.from(randomWord(6))
-    console.log(wordToFind.join(''))
+    let wordToFind = Array.from(randomWord(8))
     let inputWord = ''
 
     let initialProposition = wordToFind.map(letter => '.')
@@ -146,13 +145,22 @@
     {#each propositionsDisplayable as proposition, i}
         <li>
             {#each proposition as letter, j}
-                <span style="padding: 0 15px 0 15px; background-color: {letter.color}">{letter.value}</span>
+                <span class="{letter.color}" style="padding: 0 15px 0 15px">{letter.value}</span>
             {/each}
         </li>
     {/each}
 </ol>
 
 <style>
+    .red {
+        background-color: red;
+    }
+
+    .orange {
+        background-color: orange;
+        border-radius: 30px;
+    }
+
     .shake {
         /* Start the shake animation and make the animation last for 0.5 seconds */
         animation: shake 0.5s;
