@@ -1,5 +1,6 @@
 <script>
     import dictionnary from '../assets/dictionnary.json'
+    import dictionnaryCommonWord from '../assets/dictionnary-common-word.json'
 
     const accentsTidy = function (s) {
         var r = s.toLowerCase();
@@ -32,7 +33,7 @@
                     }).length
 
                     let letterBeforeNotWellPositionned = proposition.filter((l, i) => {
-                        console.log(letter, letterPosition, l, i)
+                        // console.log(letter, letterPosition, l, i)
                         return l === letter && i < letterPosition && l !== wordToFind[i]
                     }).length
 
@@ -40,12 +41,12 @@
                         color = 'orange'
                     }
 
-                    console.log({
-                        letter: letter,
-                        letterPosition: letterPosition,
-                        letterWellPositionned: letterWellPositionned,
-                        letterBeforeNotWellPositionned: letterBeforeNotWellPositionned
-                    })
+                    // console.log({
+                    //     letter: letter,
+                    //     letterPosition: letterPosition,
+                    //     letterWellPositionned: letterWellPositionned,
+                    //     letterBeforeNotWellPositionned: letterBeforeNotWellPositionned
+                    // })
                 }
                 return {value: letter, color: color}
             })
@@ -76,16 +77,15 @@
         return dictionnary.find(w => accentsTidy(w) === word) !== undefined
     }
 
-    function randomWord(wordMaxSize) {
-        let theWord = accentsTidy(dictionnary[Math.floor(dictionnary.length * Math.random())].toLowerCase())
-        if (theWord.length > wordMaxSize) {
-            return randomWord(wordMaxSize)
-        }
+    function randomWord() {
+        // pickup one word each 60s
+        let wordPositionInDictionnary = (Math.floor(new Date() / (60 * 1000))) % dictionnaryCommonWord.length
+        let theWord = accentsTidy(dictionnaryCommonWord[wordPositionInDictionnary].toLowerCase())
         return theWord
     }
 
     let shake = false
-    let wordToFind = Array.from(randomWord(8))
+    let wordToFind = Array.from(randomWord())
     let inputWord = ''
 
     let initialProposition = wordToFind.map(letter => '.')
@@ -140,14 +140,15 @@
 </script>
 
 <form on:submit={submit}>
-    <input class:shake="{shake}" type="text" maxlength={wordToFind.length} bind:value={inputWord} on:keyup={keyUp}/>
+    <input autofocus="autofocus" class:shake="{shake}" type="text" maxlength={wordToFind.length} bind:value={inputWord}
+           on:keyup={keyUp}/>
 </form>
 
 <ol>
     {#each propositionsDisplayable as proposition, i}
         <li>
             {#each proposition as letter, j}
-                <span class="{letter.color}" style="padding: 0 15px 0 15px">{letter.value}</span>
+                <span class="{letter.color}" style="padding: 0 0.3em 0 0.3em">{letter.value}</span>
             {/each}
         </li>
     {/each}
@@ -160,7 +161,7 @@
 
     .orange {
         background-color: orange;
-        border-radius: 30px;
+        border-radius: 1em;
     }
 
     .shake {

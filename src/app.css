@@ -1,43 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap');
 
-:root {
-  font-family: 'Source Code Pro', monospace;
-  font-size: 50px;
-  /*line-height: 24px;*/
-  font-weight: 400;
-  text-transform: uppercase;
-
-  color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    height: 100%;
+    width: 100%;
+
+    background-color: #1f1f1f;
+
+    font-family: 'Source Code Pro', monospace;
+    color: rgba(255, 255, 255, 0.87);
+    font-size: 2em;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 1em;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0.5em;
 }
 
 input {
-  font-size: 50px;
-  text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.87);
+    font-size: 1em;
+    background-color: #1f1f1f;
+    width: 80%;
+    text-transform: uppercase;
 }
 
-li {
-
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+ol {
+    list-style: none;
 }
